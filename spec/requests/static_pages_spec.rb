@@ -3,6 +3,21 @@ require 'spec_helper'
 
 describe "Static Pages" do
     subject { page }
+
+    it "should have the right links" do
+        visit root_path
+        click_link "关于"
+        page.should have_selector 'title', text: full_title('关于')
+        click_link "帮助"
+        page.should have_selector 'title', text: full_title('帮助')
+        click_link "联系我们"
+        page.should have_selector 'title', text: full_title('联系我们')
+        click_link "RubyNews"
+        page.should have_selector 'title', text: full_title('')
+        click_link "首页"
+        click_link "现在注册！"
+        page.should have_selector 'title', text: full_title('注册')       
+    end
     
     describe "Home page" do
         before { visit root_path }
